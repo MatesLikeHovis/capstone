@@ -3,7 +3,7 @@ import Nav from './Nav';
 function Header() {
     return (
         <header className="Header">
-            <img src="./Public/Logo.svg" alt="Little Lemon logo"></img>
+            <img src="/Logo.svg" alt="Little Lemon logo"></img>
             <Nav></Nav>
         </header>
     )
