@@ -114,6 +114,10 @@
   border: var(--mainYellow) 2px solid;
 }
 
+.Specials {
+  
+}
+
 .Footer {
   display: flex;
   justify-content: center;
