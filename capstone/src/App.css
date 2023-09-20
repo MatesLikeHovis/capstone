@@ -9,7 +9,7 @@
   box-sizing: border-box;
   text-align: center;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   font-family: 'Karla', sans-serif;
 }
 
@@ -34,11 +34,16 @@
   gap: 1.75rem;
   list-style-type: none;
 }
+
+.Main {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
 .Hero {
-  width: 90rem;
+  width: 100vw;
   height: 25.375rem;
-  flex-shrink: 0;
-  background: var(--mainGreen);
+  background-color: var(--mainGreen);
 }
 .Footer {
   display: flex;

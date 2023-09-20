@@ -1,7 +1,7 @@
 function Hero() {
     return (
-        <><p>The Hero Section</p>
-        </>
+        <section className="Hero"><p>The Hero Section</p>
+        </section>
     )    
 }
 
