@@ -1,4 +1,7 @@
-
+:root {
+  --mainGreen: #495E57;
+  --mainYellow: #F4C314;
+}
 .App {
   width: 100%;
   top: 0;
@@ -21,19 +24,22 @@
 
 .Nav {
   width: 70vw;
-  flex-grow: 3;
 }
 
 .Nav ul {
   font-family: 'Karla', sans-serif;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-items: space-between;
-  gap: 20px;
+  width: 40rem;
+  align-items: flex-start;
+  gap: 1.75rem;
   list-style-type: none;
 }
-
+.Hero {
+  width: 90rem;
+  height: 25.375rem;
+  flex-shrink: 0;
+  background: var(--mainGreen);
+}
 .Footer {
   display: flex;
   justify-content: center;
