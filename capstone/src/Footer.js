@@ -1,6 +1,6 @@
 function Footer() {
     return (
-        <footer>
+        <footer className="Footer">
             <img></img>
             <h4>Doormat Navigation</h4>
             <ul>
