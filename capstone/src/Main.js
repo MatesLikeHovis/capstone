@@ -2,7 +2,7 @@ import Hero from './Hero';
 import Specials from './Specials';
 import Testimonials from './Testimonials';
 import About from './About';
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function Main() {
     return (
