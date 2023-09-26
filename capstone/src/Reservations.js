@@ -5,4 +5,4 @@ function Reservations() {
     )
 }
 
-export default Rservations;
+export default Reservations;
