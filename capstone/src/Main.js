@@ -3,6 +3,8 @@ import Specials from './Specials';
 import Testimonials from './Testimonials';
 import About from './About';
 
+const [availTimes, setAvailTimes] = useState();
+
 
 function Main() {
     return (
