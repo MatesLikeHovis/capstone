@@ -1,6 +1,9 @@
 function Specials() {
+
+    const menuRef = useRef(null);
+
     return (
-        <section className="Specials">
+        <section className="Specials" ref={menuRef}>
             <div className="SpecialsTopWrapper">
                 <h2 className="SpecialsPromoText">This Week's Specials</h2>
                 <button className="stdButton OnlineOrderBtn">Online Menu</button>
