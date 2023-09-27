@@ -7,6 +7,14 @@ export function useScroll() {
 }
 
 export function ScrollProvider({ children }) {
+
+  const scrollToHome = () => {
+        const homeSection = document.getElementById('Home');
+        if (homeSection) {
+          homeSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
+
   const scrollToAbout = () => {
     const aboutSection = document.getElementById('About');
     if (aboutSection) {
@@ -22,7 +30,7 @@ export function ScrollProvider({ children }) {
   };
 
   return (
-    <ScrollContext.Provider value={{ scrollToAbout, scrollToMenu }}>
+    <ScrollContext.Provider value={{ scrollToAbout, scrollToMenu, scrollToHome }}>
       {children}
     </ScrollContext.Provider>
   );

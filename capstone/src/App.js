@@ -4,18 +4,20 @@ import Main from './Main';
 import Footer from './Footer';
 import { Route, Routes } from 'react-router-dom';
 import About from './About';
+import BookingPage from './BookingPage';
 import { ScrollProvider } from './ScrollContext';
 
 function App() {
   return (
     <ScrollProvider>
       <Header></Header>
-      <Main></Main>
-      <Footer></Footer>
       <Routes>
-        <Route path="/" element={<Main />}></Route>
+        <Route path="/Main" element={<Main />}></Route>
         <Route path="/About" element={<About />}></Route>
+        <Route path="/BookingPage" element={<BookingPage />}></Route>
       </Routes>
+      <Footer></Footer>
+      
     </ScrollProvider>
   );
 }

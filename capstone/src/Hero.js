@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 function Hero() {
     return (
         <section className="Hero">
@@ -6,7 +8,7 @@ function Hero() {
                 <h3>Chicago</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do quismod tempor incididunt ut labore et dolore magna aliqua.</p>
             </div>
-            <button className="ReserveTable stdButton">Reserve a Table</button>
+            <button className="ReserveTable stdButton"><Link to="../BookingPage">Reserve a Table</Link></button>
             <img className="heroImage" src="/restauranfood.jpg" alt="Bruschetta being delivered by a waiter"></img>
         </section>
     )    

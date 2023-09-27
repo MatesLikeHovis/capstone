@@ -1,4 +1,6 @@
 import { useScroll } from './ScrollContext';
+import {Link} from "react-router-dom";
+
 
 function Nav() {
 
@@ -6,15 +8,15 @@ function Nav() {
   
 
 
-    const { scrollToAbout, scrollToMenu } = useScroll();
+    const { scrollToAbout, scrollToMenu, scrollToHome } = useScroll();
 
     return (
         <nav className="Nav">
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><Link to="/Main">Home</Link></li>
                 <li onClick={scrollToAbout}><a href="#">About</a></li>
                 <li onClick={scrollToMenu}><a href="#">Menu</a></li>
-                <li><a href="#">Reservations</a></li>
+                <li><Link to="/BookingPage">Reservations</Link></li>
                 <li><a href="#">Order Online</a></li>
                 <li><a href="#">Login</a></li>
             </ul>

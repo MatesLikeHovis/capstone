@@ -1,17 +1,31 @@
 import { useState } from "react";
+import { useFormik } from 'formik';
 
 function BookingForm() {
     const [resDate, setResDate] = useState('');
     const [resTime, setResTime] = useState('');
     const [guests, setGuests] = useState();
     const [occasion, setOccasion] = useState();
-    const [availTimes, setAvailTimes] = useState();
+    const [availTimes, setAvailTimes] = useState([]);
 
-
+    const SignupForm = () => {
+        // Pass the useFormik() hook initial form values and a submit function that will
+        // be called when the form is submitted
+        const formik = useFormik({
+          initialValues: {
+            resDate: '',
+            resTime: '',
+            guests: 1,
+            occasion: 'birthday',
+          },
+          onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+          },
+        });
 
 
     return (
-        <form style="display: grid; maxWidth: 200px; gap: 20px">
+        <form className="BookingForm" onSubmit={formik.handleSubmit}>
             <label htmlFor="resDate">Choose date</label>
             <input value={resDate} onChange={e=>setResDate(e.target.value)} type="date" id="resDate" />
             <label htmlFor="resTime">Choose time</label>
