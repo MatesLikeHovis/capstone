@@ -4,36 +4,33 @@ import { useFormik } from 'formik';
 function BookingForm() {
 
     const [availTimes, setAvailTimes] = useState([]);
+    const [resDate, setResDate] = useState('');
 
-
-    function updateTimes() {
-        return ['10:30', '11:00', '11:30', '12:00', '12:30', '13:00']
+    function updateTimes(selectedDate) {
+        if (selectedDate) {
+            return ['10:30', '11:00', '11:30', '12:00', '12:30', '13:00'];
+        } else {
+            return []; //
+        }
     }
 
-    function initializeTimes() {
-        setAvailTimes(updateTimes());
-    }
+    const handleDateChange = (e) => {
+        const selectedDate = e.target.value;
+        setResDate(selectedDate);
+        const updatedTimes = updateTimes(selectedDate);
+        setAvailTimes(updatedTimes);
+        formik.setFieldValue('resDate', selectedDate);
+    };
+
+    const handleTimeChange = (e) => {
+        const selectedTime = e.target.value;
+        formik.setFieldValue('resTime', selectedTime);
+    };
+
 
     useEffect(() => {
-        initializeTimes();
+        setAvailTimes([]);
     }, []);
-
-        const formik = useFormik({
-          initialValues: {
-            resDate: '',
-            resTime: '',
-            guests: 1,
-            occasion: 'birthday',
-          },
-          onSubmit: values => {
-                formik.validateForm().then(() => {
-                    if (Object.keys(formik.errors).length === 0) {
-                        // Validation succeeded, you can submit the form here.
-                        alert('Thank you - your booking was successful!');
-                    }
-                });
-          },
-        });
 
     const validate = values => {
         const errors = {};
@@ -56,16 +53,43 @@ function BookingForm() {
         return errors;
     }
 
+        const formik = useFormik({
+          initialValues: {
+            resDate: '',
+            resTime: '',
+            guests: 1,
+            occasion: 'birthday',
+          },
+          validate,
+          onSubmit: values => {
+                formik.validateForm().then(() => {
+                    if (Object.keys(formik.errors).length === 0) {
+                        alert('Thank you - your booking was successful!');
+                    }
+                });
+          },
+        });
+
+
     return (
         <form className="BookingForm" onSubmit={formik.handleSubmit}>
             <label htmlFor="resDate">Choose date</label>
-            <input onChange={formik.handleChange} onBlur={formik.handleBlur} type="date" id="resDate" value={formik.values.resDate}/>
+            <input onChange={handleDateChange} onBlur={formik.handleBlur} type="date" id="resDate" value={formik.values.resDate}/>
+            {formik.touched.resDate && formik.errors.resDate ? (
+                <div className="error-message">{formik.errors.resDate}</div>
+            ) : null}
             <label htmlFor="resTime">Choose time</label>
-            <select id="resTime " onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.resTime}>
+            <select id="resTime " onChange={handleTimeChange} onBlur={formik.handleBlur} value={formik.values.resTime}>
                 {availTimes.map((time) => <option key={time} value={time}>{time}</option>)}
             </select>
+            {formik.touched.resTime && formik.errors.resTime ? (
+                <div className="error-message">{formik.errors.resTime}</div>
+            ) : null}
             <label htmlFor="guests">Number of guests</label>
             <input value={formik.values.guests} onChange={formik.handleChange} onBlur={formik.handleBlur} type="number" placeholder="1" min="1" max="10" id="guests" />
+            {formik.touched.guests && formik.errors.guests ? (
+                <div className="error-message">{formik.errors.guests}</div>
+            ) : null}
             <label for="occasion">Occasion</label>
             <select id="occasion" value={formik.values.occasion} onChange={formik.handleChange}>
                 <option>Birthday</option>
