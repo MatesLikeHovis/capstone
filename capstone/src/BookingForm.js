@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFormik } from 'formik';
 
 function BookingForm() {
-    const [resDate, setResDate] = useState('');
-    const [resTime, setResTime] = useState('');
-    const [guests, setGuests] = useState();
-    const [occasion, setOccasion] = useState();
+
     const [availTimes, setAvailTimes] = useState([]);
 
-    const SignupForm = () => {
-        // Pass the useFormik() hook initial form values and a submit function that will
-        // be called when the form is submitted
+
+    function updateTimes() {
+        return ['10:30', '11:00', '11:30', '12:00', '12:30', '13:00']
+    }
+
+    function initializeTimes() {
+        setAvailTimes(updateTimes());
+    }
+
+    useEffect(() => {
+        initializeTimes();
+    }, []);
+
         const formik = useFormik({
           initialValues: {
             resDate: '',
@@ -19,28 +26,53 @@ function BookingForm() {
             occasion: 'birthday',
           },
           onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+                formik.validateForm().then(() => {
+                    if (Object.keys(formik.errors).length === 0) {
+                        // Validation succeeded, you can submit the form here.
+                        alert('Thank you - your booking was successful!');
+                    }
+                });
           },
         });
 
+    const validate = values => {
+        const errors = {};
+        if (!values.resDate) {
+              errors.resDate = 'Required';
+            }
+          
+        if (!values.resTime) {
+              errors.resTime = 'Required';
+            }
+          
+        if (!values.guests) {
+              errors.guests = 'Required';
+            } else if (values.guests < 1) {
+              errors.guests = 'You must have at least one guest!';
+            } else if (values.guests > 10) {
+              errors.guests = "For parties larger than ten, please phone us directly!";
+            }
+          
+        return errors;
+    }
 
     return (
         <form className="BookingForm" onSubmit={formik.handleSubmit}>
             <label htmlFor="resDate">Choose date</label>
-            <input value={resDate} onChange={e=>setResDate(e.target.value)} type="date" id="resDate" />
+            <input onChange={formik.handleChange} onBlur={formik.handleBlur} type="date" id="resDate" value={formik.values.resDate}/>
             <label htmlFor="resTime">Choose time</label>
-            <select id="resTime " value={resTime} onChange={e=>setResTime(e.target.value)}>
-                {availTimes.map((time) => <option key={time.key}>{time.value}</option>)}
+            <select id="resTime " onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.resTime}>
+                {availTimes.map((time) => <option key={time} value={time}>{time}</option>)}
             </select>
             <label htmlFor="guests">Number of guests</label>
-            <input value={guests} onChange={e=>setGuests(e.target.value)} type="number" placeholder="1" min="1" max="10" id="guests" />
+            <input value={formik.values.guests} onChange={formik.handleChange} onBlur={formik.handleBlur} type="number" placeholder="1" min="1" max="10" id="guests" />
             <label for="occasion">Occasion</label>
-            <select id="occasion" value={occasion} onChange={e=>setOccasion(e.target.value)}>
+            <select id="occasion" value={formik.values.occasion} onChange={formik.handleChange}>
                 <option>Birthday</option>
                 <option>Anniversary</option>
             </select>
             <input type="submit" value="Make Your reservation" />
-        </form>
+        </ form>
     )
 }
 
